@@ -168,37 +168,16 @@ class NN:
                 
         return costs, grads
 
-def minibatch_gen(data, batch_size):
-    """
-    Args: 
-        data: data
-        batch_size: size of each minibatch. Try to use powers of two for memory efficiency.
-
-    Yields:
-        Data in num_batches equal batches with the last one (possibly) shorter  
-
-    Notes: 
-        You might want to shuffle your data (np.random.shuffle) before input
-        
-    """
-    num_batches = int(np.ceil(data.shape[0] / batch_size))
-    for i in range(1,num_batches+1):
-        yield data[(i-1)*batch_size:i*batch_size, :]
-
 def minibatch_gen_from_pddf(data, target_label, batch_size, shuffle=True):
     """
     Args: 
         data: data as pandas df
         target_label: target label column name in df
-        batch_size: desired number of batches
-        shuffle: shuffles data.
+        batch_size: batch size
+        shuffle: whether to shuffle the data.
 
     Yields:
         Data in num_batches equal batches with the last one (possibly) shorter  
-
-    Notes: 
-        You might want to shuffle your data (np.random.shuffle) before input
-        Ideally use powers of two as batch_size for memory reasons
     """
     target = np.array(data.pop(target_label))
     data = np.array(data)
