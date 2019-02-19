@@ -27,11 +27,8 @@ class NN:
         self.layers = layers
         self.data = data
         self.labels = labels
-        ##Todo figure this thing
-        ##self.layers.insert(0, [data.shape[0], "relu"])
         self.learning_rate = learning_rate
         self.params = self.init_params()
-        ##initialize parameters
     
     def sigmoid(self, Z):
         #Also returns original to help with backprop
@@ -83,7 +80,6 @@ class NN:
         Z, lin_cache = self.forward_linear_step(A_prev, W, b)
 
         assert (function in ["relu", "sigmoid", "tanh"])
-        #Use a class method with the given name
         A, act_cache = getattr(self, function)(Z)
         
         return A, (lin_cache, act_cache)
@@ -126,7 +122,6 @@ class NN:
         
         assert (function in ["relu", "sigmoid", "tanh"])
         function = str("d_" + function)
-        #Use a derivative class method with the given name
         dZ = getattr(self, function)(dA, act_cache)
         dA_prev, dW, db = self.backward_linear_step(dZ, lin_cache)
         
@@ -203,18 +198,15 @@ def minibatch_gen_from_pddf(data, target_label, batch_size, shuffle=True):
         You might want to shuffle your data (np.random.shuffle) before input
         Ideally use powers of two as batch_size for memory reasons
     """
-    #index = (np.array(data.pop(index_name)) if index_name else None)
     target = np.array(data.pop(target_label))
     data = np.array(data)
     
     if shuffle:
         perm = np.random.permutation(len(target))
         target, data = target[perm], data[perm]
-        #if index is not None: index = index[perm]
         
     num_batches = int(np.ceil(len(target) / batch_size))
     
     for i in range(1,num_batches+1):
         yield data[(i-1)*batch_size:i*batch_size, :], \
               target[(i-1)*batch_size:i*batch_size]
-              #(index[(i-1)*batch_size:i*batch_size] if index is not None else None)
