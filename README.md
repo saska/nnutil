@@ -1,7 +1,8 @@
 # nnutil
 Tool for creating numpy neural nets
 
-A little module for quickly and simply creating numpy neural nets. Found useful for demo purposes where e.g. TensorFlow might break when switching systems. 
+A little module for quickly and simply creating numpy neural nets. 
+Found useful for eliminating dependencies for quick poc/demo purposes where "this thing needs to run on this laptop in three hours and TensorFlow just broke". If you've got a static, stable environment you should probably use something else.
 
 Quick training example:
 

@@ -9,15 +9,17 @@ class NN:
         [[8,"relu"],
          [5,"relu"],
          [3,"relu"],
-         [2, "tanh"]]
+         [2, "sigmoid"]]
          
-         Currently supported functions: "relu", "tanh", "sigmoid"
-        
+        Currently supported functions: "relu", "tanh", "sigmoid"
+        Notes:
+        - Need to pass data or array-like of similar shape on initialization for creation of first layer 
+        - Currently only works with sigmoid activation in the last layer due to
+          the cost function partial derivative
     learning_rate: learning rate
     
     Uses heuristic initialization similar to Xavier (initial weights multiplied by np.sqrt(2/layer_sizes[i-1]))
     Uses cross-entropy cost
-        
     """
     def __init__(self,  
                  layers,
