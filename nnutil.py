@@ -54,8 +54,8 @@ class NN:
         
     def tanh(self, Z):
         #Also returns original to help with backprop
-        A, _ = self.sigmoid(Z * 2)
-        return A - 1, Z
+        A, _ = (self.sigmoid(Z * 2) * 2) - 1
+        return A, Z
     
     def d_tanh(self, dA, cache):
         t, _ = self.tanh(cache)
